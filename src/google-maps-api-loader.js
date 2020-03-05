@@ -36,6 +36,8 @@ function googleMapsApiLoader(params) {
     return Promise.resolve(googleApi);
   }
 
+  const { loadingTimeout } = params;
+
   return new Promise(function(resolve, reject) {
     loadAutoCompleteAPI(params);
 
@@ -48,7 +50,7 @@ function googleMapsApiLoader(params) {
       if (!window.google) {
         reject(new Error('Loading took too long'));
       }
-    }, 5000);
+    }, params.loadingTimeout || 5000);
   });
 }
 
